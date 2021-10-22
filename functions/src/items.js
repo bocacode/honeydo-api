@@ -6,7 +6,7 @@ exports.getUserItems = async (req, res) => {
   const db = client.db('Honey-Do')
   const collection = db.collection('items')
   try {
-    const results = collection.find({ 'uid': Number(uid) })
+    const results = collection.find({ 'uid': uid })
     const items = await results.toArray()
     res.send(items)
   } catch (error) {
@@ -15,7 +15,7 @@ exports.getUserItems = async (req, res) => {
 }
 
 exports.createUserItem = async (req, res) => {
-  const {name, uid } = req.body
+  const { name, uid } = req.body
   if(!name || !uid) {
     res.status(401).send('Invalid request')
   }

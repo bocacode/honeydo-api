@@ -8,6 +8,7 @@ let isConnected = false
 exports.getClient = async () => {
   if(!isConnected) {
     await client.connect()
+    isConnected = true
   }
   return client
 }
