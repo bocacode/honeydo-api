@@ -1,4 +1,13 @@
 const { MongoClient } = require('mongodb')
 const {dbConfig} = require('./dbConfig')
 
-exports.dbConnection = new MongoClient(dbConfig.url)
+const client = new MongoClient(dbConfig.url)
+
+let isConnected = false
+
+exports.getClient = async () => {
+  if(!isConnected) {
+    await client.connect()
+  }
+  return client
+}
