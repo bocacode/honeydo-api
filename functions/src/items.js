@@ -1,11 +1,12 @@
-const { dbConnection } = require('./dbConnection')
+const { getClient } = require('./dbConnection')
 
 
 exports.createUserItem = async (req, res) => {
-  // do some stuff
-  await dbConnection.connect()
+ 
 
-  const db = dbConnection.db();
+  const client = await getClient()
+  const db = client.db();
+  // const db = getClient().db("Honey-Do");
   const collection = db.collection('items');
 
   const {name, uid } = req.body
